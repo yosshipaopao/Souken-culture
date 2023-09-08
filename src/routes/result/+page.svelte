@@ -5,7 +5,12 @@
     export let data: PageData;
     const dateToTimeString=(date:Date)=>{
         return `${date.getHours()}:${("00"+date.getMinutes()).slice(-2)}:${("00"+date.getSeconds()).slice(-2)}`
-
+    }
+    const calTotal=(total:number)=>{
+        const totalHour = Math.floor(total / (1000 * 60 * 60));
+        const totalMinuets = Math.floor(total / (1000 * 60)) % 60;
+        const totalSecond = Math.floor(total / 1000) % 60;
+        return `${("0"+totalHour).slice(-2)}:${("0"+totalMinuets).slice(-2)}:${("0"+totalSecond).slice(-2)}`
     }
 </script>
 <div class='hero min-h-screen fixed top-0 -z-10'>
@@ -16,7 +21,7 @@
                     <h1 class='font-bold text-3xl'>Result</h1>
                     <h1 class='font-bold text-3xl'>start:   {dateToTimeString(data.yourResult.start)}</h1>
                     <h1 class='font-bold text-3xl'>finish:   {dateToTimeString(data.yourResult.end)}</h1>
-                    <h1 class='font-bold text-3xl'>total:   {("0"+Math.floor(data.yourResult.total/1000/60/60)).slice(-2)}:{("0"+Math.floor(data.yourResult.total/1000/60)%60).slice(-2)}:{("0"+Math.floor(data.yourResult.total/1000)%3600).slice(-2)}</h1>
+                    <h1 class='font-bold text-3xl'>total:   {calTotal(data.yourResult.total)}</h1>
                 {:else}
                     <h1 class='font-bold text-3xl'>未達成</h1>
                 {/if}
@@ -27,7 +32,7 @@
                         <figure><img src={user.image} alt="icon"/></figure>
                         <div class="card-body py-3 text-left">
                             <h2 class="card-title">{user.name}</h2>
-                            <p>total:   {("0"+Math.floor(user.total/1000/60/60)).slice(-2)}:{("0"+Math.floor(user.total/1000/60)%60).slice(-2)}:{("0"+Math.floor(user.total/1000)%3600).slice(-2)}</p>
+                            <p>total:   {calTotal(user.total)}</p>
                         </div>
                     </div>
                 {/each}
