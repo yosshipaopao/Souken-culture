@@ -1,0 +1,9 @@
+name = "worker"
+compatibility_date = "2023-07-02"
+workers_dev = true
+node_compat = true
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "souken"
+database_id = "14677a3f-ae5a-42a3-b174-8d34ae6f9e95"
+preview_database_id = "local-test-db" # A user-defined ID for your local test database.
