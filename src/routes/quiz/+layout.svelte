@@ -39,13 +39,13 @@
                 <h1 class='text-5xl font-bold'>コースを選択してください</h1>
                 <form method='post' action='/quiz?/course' class='block flex justify-between w-96'>
                     <input type='hidden' name='redirect' value={here}>
-                    <button class='btn btn-primary' type='submit' name='course' value='beginner'>
+                    <button class='btn btn-primary' type='submit' name='course' value='beginner' disabled={data.doneCourses.find(v=>v===1)}>
                         初級
                     </button>
-                    <button class='btn btn-primary' type='submit' name='course' value='intermediate'>
+                    <button class='btn btn-primary' type='submit' name='course' value='intermediate' disabled={data.doneCourses.find(v=>v===2)}>
                         中級
                     </button>
-                    <button class='btn btn-primary' type='submit' name='course' value='advanced'>
+                    <button class='btn btn-primary' type='submit' name='course' value='advanced' disabled={data.doneCourses.find(v=>v===3)}>
                         上級
                     </button>
                 </form>

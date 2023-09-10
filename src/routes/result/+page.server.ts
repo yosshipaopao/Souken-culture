@@ -1,38 +1,37 @@
 import type { PageServerLoad } from './$types';
 import { drizzle } from 'drizzle-orm/d1';
-import { participants, users } from '$lib/schema';
+import { results, users } from '$lib/schema';
 import { and, asc, eq, isNotNull } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ locals, parent, request }) => {
 	const { session } = await parent();
 	const id = (session?.user?.id as string | undefined) ?? 'not signedIn user';
-	const db = drizzle(locals.DB);
+	const db = drizzle(locals.DB);let reqCourse = parseInt(
+		new URL(request.url).searchParams.get('course') ?? '1'
+	);
+
+	if (isNaN(reqCourse)) reqCourse = 1;
 	const yourResult = await db
 		.select({
-			start: participants.start,
-			end: participants.end,
-			total: participants.totalTime,
-			course: participants.course
+			course: results.course,
+			total: results.totalTime,
+			start: results.start,
+			end: results.end
 		})
-		.from(participants)
-		.where(eq(participants.userId, id))
+		.from(results)
+		.where(and(eq(results.userId, id),eq(results.course,reqCourse)))
 		.get();
-
-	let reqCourse = parseInt(
-		new URL(request.url).searchParams.get('course') ?? yourResult?.course?.toString() ?? '1'
-	);
-	if (isNaN(reqCourse)) reqCourse = 1;
 
 	const fastest = await db
 		.select({
 			name: users.name,
 			image: users.image,
-			total: participants.totalTime
+			total: results.totalTime
 		})
-		.from(participants)
-		.where(and(eq(participants.course, reqCourse), isNotNull(participants.totalTime)))
-		.leftJoin(users, eq(users.id, participants.userId))
-		.orderBy(asc(participants.totalTime));
+		.from(results)
+		.where(and(eq(results.course, reqCourse), isNotNull(results.totalTime)))
+		.leftJoin(users, eq(users.id, results.userId))
+		.orderBy(asc(results.totalTime));
 
 	return {
 		yourResult: yourResult?.end ? yourResult : null,

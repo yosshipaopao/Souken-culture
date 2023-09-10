@@ -2,8 +2,8 @@ import type { Actions, PageServerLoad } from './$types';
 import { drizzle } from 'drizzle-orm/d1';
 
 import verifyAnswer from '$lib/server/verifyAnswer';
-import { answers, participants } from '$lib/schema';
-import { error, fail } from '@sveltejs/kit';
+import { answers, participants, results } from '$lib/schema';
+import { error, fail, redirect } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 
 //ここを変更
@@ -37,7 +37,7 @@ export const actions: Actions = {
 			.where(eq(participants.userId, session.user.id))
 			.get()
 			.then((v) => v ?? { course: null, start: null });
-		if (!course) throw error(400, 'You are not enrolled in any course');
+		if (!course||!start) throw error(400, 'You are not enrolled in any course');
 		if (!(course in ans)) throw error(400, 'You are not enrolled in any course');
 
 		if (ans[course] !== answer) {
@@ -47,15 +47,19 @@ export const actions: Actions = {
 				message: 'Wrong answer'
 			});
 		} else {
+			await db.delete(participants).where(eq(participants.userId, session.user.id));
+			await db.delete(answers).where(eq(answers.userId, session.user.id));
 			await db
-				.update(participants)
-				.set({
-					end: new Date(),
-					totalTime: new Date().getTime() - start.getTime()
+				.insert(results)
+				.values({
+					userId: session.user.id,
+					course,
+					totalTime: new Date().getTime() - start.getTime(),
+					start,
+					end: new Date()
 				})
-				.where(eq(participants.userId, session.user.id));
 			//AC
-			return { success: true };
+			throw redirect(302, `/result?course=${q}`)
 		}
 	}
 };

@@ -15,6 +15,14 @@
     });
 </script>
 {#if showable}
+    <input type="checkbox" id="finalModal" class="modal-toggle" checked={true} />
+    <div class="modal z-50">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">正解！</h3>
+            <p class="py-4">最終問題です！！！</p>
+        </div>
+        <label class="modal-backdrop" for="finalModal">Close</label>
+    </div>
     <QuizBase {form} answer={data.answer} {q}>
         {#if data.course === 1}
             <Quiz questionnaire='回答を入力'>
