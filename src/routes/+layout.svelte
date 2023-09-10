@@ -72,6 +72,8 @@
         <div class="flex gap-4">
             <button class="btn btn-primary" on:click={()=>signIn("google")}>Google</button>
             <button class="btn btn-primary" on:click={()=>signIn("line")}>LINE</button>
+            <button class="btn btn-primary" on:click={()=>signIn("facebook")}>Facebook</button>
+            <button class="btn btn-primary" on:click={()=>signIn("discord")}>Discord</button>
         </div>
     </div>
     <label class="modal-backdrop" for="signInModal"/>

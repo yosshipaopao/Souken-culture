@@ -1,6 +1,6 @@
-import { SECRET, LINE_ID, LINE_SECRET, GOOGLE_ID, GOOGLE_SECRET } from '$env/static/private';
+import { SECRET, GOOGLE_ID, GOOGLE_SECRET,DISCORD_ID,DISCORD_SECRET } from '$env/static/private';
 import { SvelteKitAuth } from '@auth/sveltekit';
-import LINE from '@auth/core/providers/line';
+import Discord from '@auth/core/providers/discord';
 import Google from '@auth/core/providers/google';
 import type { Handle } from '@sveltejs/kit';
 import { AuthAdapter } from '$lib/server/Adapter';
@@ -17,7 +17,7 @@ const auth = SvelteKitAuth(async ({ locals }) => {
 	return {
 		adapter: AuthAdapter(db),
 		providers: [
-			LINE({ clientId: LINE_ID, clientSecret: LINE_SECRET }),
+			Discord({ clientId: DISCORD_ID, clientSecret: DISCORD_SECRET}),
 			Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET })
 		],
 		secret: SECRET,

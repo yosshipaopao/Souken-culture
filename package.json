@@ -14,13 +14,12 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
-		"migrate": "drizzle-kit generate:sqlite --schema=./src/lib/schema.ts",
-		"migrate:up": "wrangler d1 execute souken --file "
+		"generate": "drizzle-kit generate:sqlite --schema=./src/lib/schema.ts",
+		"migrate": "wrangler d1 execute souken --file "
 	},
 	"devDependencies": {
 		"@iconify/svelte": "^3.1.4",
 		"@playwright/test": "^1.37.1",
-		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/adapter-cloudflare": "^2.3.3",
 		"@sveltejs/kit": "^1.24.1",
 		"@typescript-eslint/eslint-plugin": "^6.6.0",
