@@ -6,6 +6,11 @@
     let del=false;
 </script>
 
+<svelte:head>
+    <title>豆腐創作活動研究会|リセット</title>
+    <meta name='description' content='豆腐創作活動研究会の問題の進捗を削除します。'>
+</svelte:head>
+
 <div class='hero min-h-screen fixed top-0 -z-10'>
     <div class='hero-content flex-col md:flex-row-reverse'>
         {#if $page.data.session}

@@ -38,6 +38,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>豆腐創作活動研究会|クイズ</title>
+	<meta name='description' content='豆腐創作活動研究会のクイズページです。'/>
+</svelte:head>
+
 {#if $page.data.session}
 	{#if data.status === "notStarted"}
 		<div class='hero min-h-screen fixed top-0 -z-10'>

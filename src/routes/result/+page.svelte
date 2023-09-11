@@ -13,6 +13,12 @@
         return `${("0"+totalHour).slice(-2)}:${("0"+totalMinuets).slice(-2)}:${("0"+totalSecond).slice(-2)}`
     }
 </script>
+
+<svelte:head>
+    <title>豆腐創作活動研究会|Result</title>
+    <meta name="description" content="クイズの結果ページです。"/>
+</svelte:head>
+
 <div class='hero min-h-screen fixed top-0 -z-10'>
     <div class='hero-content text-center'>
         <div class='flex flex-col md:flex-row gap-4'>

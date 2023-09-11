@@ -4,6 +4,11 @@
 	export let form:ActionData;
 </script>
 
+<svelte:head>
+	<title>プロファイルの変更</title>
+	<meta name='description' content='プロファイルの変更' />
+</svelte:head>
+
 <div class='hero min-h-screen fixed top-0 -z-10'>
 	<div class='hero-content flex-col md:flex-row-reverse'>
 		{#if $page.data.session}
