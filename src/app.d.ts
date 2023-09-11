@@ -16,4 +16,17 @@ declare global {
 	}
 }
 
+//
+declare module '@auth/core/types' {
+	interface Session {
+		user?: {
+			name: string;
+			email: string | null;
+			image: string;
+			id: string;
+		};
+		expires?: string;
+	}
+}
+
 export {};

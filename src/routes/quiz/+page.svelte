@@ -1,11 +1,11 @@
 <script lang='ts'>
-	import type { PageData, ActionData } from './$types';
+	import type {  ActionData } from './$types';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-    import { page } from '$app/stores';
-	export let data: PageData;
 	export let form: ActionData;
-	if (form && form.success) onMount(() => goto(form?.redirect));
+	if (form && form.success) onMount(() => {
+      if (form?.redirect) goto(form.redirect);
+  });
 </script>
 
 <div class='hero min-h-screen fixed top-0 -z-10'>

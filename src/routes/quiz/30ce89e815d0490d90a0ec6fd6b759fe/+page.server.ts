@@ -1,6 +1,5 @@
 import type { Actions, PageServerLoad } from './$types';
 import { drizzle } from 'drizzle-orm/d1';
-
 import { error, fail } from '@sveltejs/kit';
 import { answers, participants } from '$lib/schema';
 import { eq } from 'drizzle-orm';

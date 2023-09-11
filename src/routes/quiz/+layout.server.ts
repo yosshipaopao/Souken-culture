@@ -1,7 +1,7 @@
 import type { LayoutServerLoad } from './$types';
 import { answers, participants, results } from '$lib/schema';
-import { error, redirect } from '@sveltejs/kit';
-import { asc, desc, eq } from 'drizzle-orm';
+import { redirect } from '@sveltejs/kit';
+import { asc, eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/d1';
 
 export const load: LayoutServerLoad = async ({ parent, locals, request }) => {
@@ -48,7 +48,11 @@ export const load: LayoutServerLoad = async ({ parent, locals, request }) => {
 	if (answer.length == quizLength && answer.every((v) => v.isCorrect)) {
 		if (!new URL(request.url).pathname.endsWith('final')) throw redirect(302, '/quiz/final');
 	}
-	const doneCourses = await db.selectDistinct({course:results.course}).from(results).where(eq(results.userId,parentData.session?.user?.id??'')).then(v=>v.map(v=>v.course));
+	const doneCourses = await db
+		.selectDistinct({ course: results.course })
+		.from(results)
+		.where(eq(results.userId, parentData.session?.user?.id ?? ''))
+		.then((v) => v.map((v) => v.course));
 	const start = participant?.start;
 	const status = !participant ? 'notStarted' : 'started';
 	const course = !participant ? null : participant.course;

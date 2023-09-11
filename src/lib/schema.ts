@@ -2,13 +2,21 @@ import { sqliteTable, integer, text, primaryKey } from 'drizzle-orm/sqlite-core'
 import type { AdapterAccount } from '@auth/core/adapters';
 import { sql } from 'drizzle-orm';
 
-export const results = sqliteTable('result', {
-	userId: text('userId').references(() => users.id, { onDelete: 'set null' }),
-	course: integer('course').notNull(),
-	totalTime: integer('totalTime').notNull(),
-	start: integer('start', { mode: 'timestamp_ms' }).notNull(),
-	end: integer('end', { mode: 'timestamp_ms' }).notNull(),
-});
+export const results = sqliteTable(
+	'result',
+	{
+		userId: text('userId').references(() => users.id, { onDelete: 'set null' }),
+		course: integer('course').notNull(),
+		totalTime: integer('totalTime').notNull(),
+		start: integer('start', { mode: 'timestamp_ms' }).notNull(),
+		end: integer('end', { mode: 'timestamp_ms' }).notNull()
+	},
+	(vt) => {
+		return {
+			compoundKey: primaryKey(vt.userId, vt.course)
+		};
+	}
+);
 
 export const participants = sqliteTable('participant', {
 	userId: text('userId')

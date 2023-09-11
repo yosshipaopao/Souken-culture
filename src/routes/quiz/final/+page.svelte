@@ -2,7 +2,6 @@
     import type { PageData, ActionData } from './$types';
     import Quiz from '$lib/components/quiz.svelte';
     import QuizBase from '$lib/components/quizBase.svelte';
-    import { page } from '$app/stores';
 
     export let data: PageData;
     export let form: ActionData;

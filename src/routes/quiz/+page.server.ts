@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import { participants } from '$lib/schema';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/d1';

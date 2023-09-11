@@ -1,6 +1,5 @@
 <script lang="ts">
     export let image: string | null = null;
-
     export let questionnaire: string ="回答を選択してください";
 </script>
 <div class='w-screen min-h-screen flex flex-col gap-4 mt-10 md:px-8 sm:px-4 px-2'>

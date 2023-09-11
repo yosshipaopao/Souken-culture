@@ -6,9 +6,8 @@ import { and, asc, eq, isNotNull } from 'drizzle-orm';
 export const load: PageServerLoad = async ({ locals, parent, request }) => {
 	const { session } = await parent();
 	const id = (session?.user?.id as string | undefined) ?? 'not signedIn user';
-	const db = drizzle(locals.DB);let reqCourse = parseInt(
-		new URL(request.url).searchParams.get('course') ?? '1'
-	);
+	const db = drizzle(locals.DB);
+	let reqCourse = parseInt(new URL(request.url).searchParams.get('course') ?? '1');
 
 	if (isNaN(reqCourse)) reqCourse = 1;
 	const yourResult = await db
@@ -19,7 +18,7 @@ export const load: PageServerLoad = async ({ locals, parent, request }) => {
 			end: results.end
 		})
 		.from(results)
-		.where(and(eq(results.userId, id),eq(results.course,reqCourse)))
+		.where(and(eq(results.userId, id), eq(results.course, reqCourse)))
 		.get();
 
 	const fastest = await db

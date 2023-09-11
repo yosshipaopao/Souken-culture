@@ -103,7 +103,7 @@
 	<div class='drawer-side z-50'>
 		<label for='sidebar' class='drawer-overlay'></label>
 		<ul class='menu p-4 w-80 min-h-full bg-base-200 text-base-content'>
-			<li>サイドバーに表示できるほど作ってない</li>
+			<li><a href='/quiz'>Quiz</a></li>
 			<li><a href='/result'>リザルト画面</a></li>
 			<li class='mt-auto'>
 				<select class='select select-primary w-full max-w-xs' bind:value={currentTheme}>
