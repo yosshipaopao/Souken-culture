@@ -59,7 +59,7 @@ export const actions: Actions = {
 					end: new Date()
 				})
 			//AC
-			throw redirect(302, `/result?course=${q}`)
+			throw redirect(302, `/result?course=${course}`)
 		}
 	}
 };
