@@ -3,7 +3,6 @@ import { answers, participants, results } from '$lib/schema';
 import { error, redirect } from '@sveltejs/kit';
 import { asc, desc, eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/d1';
-import { goto } from '$app/navigation';
 
 export const load: LayoutServerLoad = async ({ parent, locals, request }) => {
 	const db = drizzle(locals.DB);

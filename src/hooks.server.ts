@@ -8,6 +8,14 @@ import { drizzle } from 'drizzle-orm/d1';
 import { sequence } from '@sveltejs/kit/hooks';
 import { createBridge } from 'cfw-bindings-wrangler-bridge';
 
+
+const theme = (async ({ event, resolve }) => {
+	const theme = event.cookies.get('theme') ?? '';
+	return resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('data-theme=\'\'', `data-theme='${theme}'`)
+	});
+}) satisfies Handle;
+
 const DB = (async ({ event, resolve }) => {
 	event.locals.DB = event.platform?.env.DB ?? createBridge().D1Database('DB');
 	return resolve(event);
@@ -35,4 +43,4 @@ const auth = SvelteKitAuth(async ({ locals }) => {
 	};
 }) satisfies Handle;
 
-export const handle = sequence(DB, auth);
+export const handle = sequence(theme,DB, auth);
