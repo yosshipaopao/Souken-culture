@@ -21,12 +21,12 @@ export const AuthAdapter = (client: DrizzleD1Database): Adapter => {
 				.then((v) => v ?? null);
 		},
 		getUserByEmail(data) {
-			return client
+			return data?null:null/*client
 				.select()
 				.from(users)
 				.where(eq(users.email, data))
 				.get()
-				.then((v) => v ?? null);
+				.then((v) => v ?? null);*/
 		},
 		createSession(data) {
 			return client.insert(sessions).values(data).returning().get();

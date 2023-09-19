@@ -5,7 +5,7 @@ import { and, asc, eq, isNotNull } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ locals, parent, request }) => {
 	const { session } = await parent();
-	const id = (session?.user?.id as string | undefined) ?? 'not signedIn user';
+	const id = (session?.user.id as string | undefined) ?? 'not signedIn user';
 	const db = drizzle(locals.DB);
 	let reqCourse = parseInt(new URL(request.url).searchParams.get('course') ?? '1');
 
