@@ -50,16 +50,12 @@
                 <h1 class='text-5xl font-bold'>コースを選択してください</h1>
                 <form method='post' action='/quiz?/course' class='flex flex-col gap-2 justify-center w-96'>
                     <input type='hidden' name='redirect' value={here}>
-                    <input type="submit" name="course" value="beginner" id="beginner" class="hidden"
-                           disabled={data.doneCourses.some(v=>v===1)}>
-                    <label for="beginner" class='btn btn-primary course-label'>ただのなぞなぞ超絶簡単コース</label>
-                    <input type="submit" name="course" value="intermediate" id="intermediate" class="hidden"
-                           disabled={data.doneCourses.some(v=>v===2)}>
-                    <label for="intermediate" class='btn btn-primary course-label'>校内周遊コース
-                    </label>
-                    <input type="submit" name="course" value="advanced" id="advanced" class="hidden"
-                           disabled={data.doneCourses.some(v=>v===3)}>
-                    <label for="advanced" class='btn btn-primary course-label'>数学鬼コース</label>
+                    <button type="submit" name="course" value="beginner" class="btn btn-primary course-label"
+                           disabled={data.doneCourses.some(v=>v===1)}>ただのなぞなぞ超絶簡単コース</button>
+                    <button type="submit" name="course" value="intermediate" class="btn btn-primary course-label"
+                           disabled={data.doneCourses.some(v=>v===2)}>校内周遊コース</button>
+                    <button type="submit" name="course" value="advanced" class="btn btn-primary course-label"
+                           disabled={data.doneCourses.some(v=>v===3)}>数学鬼コース</button>
                 </form>
             </div>
         </div>
