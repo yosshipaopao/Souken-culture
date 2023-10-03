@@ -1,13 +1,13 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from '../../../../.svelte-kit/types/src/routes';
 import { drizzle } from 'drizzle-orm/d1';
 import { results, users } from '$lib/schema';
 import { and, asc, eq, isNotNull } from 'drizzle-orm';
 
-export const load: PageServerLoad = async ({ locals, parent, request }) => {
+export const load: PageServerLoad = async ({ locals, parent, request ,params}) => {
 	const { session } = await parent();
-	const id = (session?.user.id as string | undefined) ?? 'not signedIn user';
+	const id = (session?.user?.id as string | undefined) ?? 'not signedIn user';
 	const db = drizzle(locals.DB);
-	let reqCourse = parseInt(new URL(request.url).searchParams.get('course') ?? '1');
+	let reqCourse =params.course;
 
 	if (isNaN(reqCourse)) reqCourse = 1;
 	const yourResult = await db
@@ -34,6 +34,7 @@ export const load: PageServerLoad = async ({ locals, parent, request }) => {
 
 	return {
 		yourResult: yourResult?.end ? yourResult : null,
-		fastest
+		fastest,
+		course: reqCourse
 	};
 };

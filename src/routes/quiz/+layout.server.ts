@@ -46,6 +46,7 @@ export const load: LayoutServerLoad = async ({ parent, locals, request }) => {
 		.where(eq(participants.userId, parentData.session?.user?.id ?? ''))
 		.get();
 	if (answer.length == quizLength && answer.every((v) => v.isCorrect)) {
+		//memo ここが全問正解処理
 		if (!new URL(request.url).pathname.endsWith('final')) throw redirect(302, '/quiz/final');
 	}
 	const doneCourses = await db

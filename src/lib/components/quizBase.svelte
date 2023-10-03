@@ -8,7 +8,7 @@
 		setTimeout(() => form = null, 3000);
 	}
 </script>
-<div class='toast'>
+<div class='toast z-50'>
 	{#if form && !form.success}
 		<div class='alert alert-error'>
 			<span>{form.message}</span>
