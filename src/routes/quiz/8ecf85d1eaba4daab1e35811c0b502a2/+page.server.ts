@@ -10,7 +10,7 @@ const q = '8ecf85d1eaba4daab1e35811c0b502a2';
 const ans: {
 	[key: number]: string;
 } = {
-	1: 'Beginner',
+	1: 'もういちもん',
 	2: '13',
 	3: "74"
 };

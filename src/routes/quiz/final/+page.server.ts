@@ -29,24 +29,27 @@ export const load: PageServerLoad = async ({locals}) => {
         .where(eq(participants.userId, session.user.id))
         .get()
         .then((v) => v ?? {course: null, start: null});
-    const penalty = await db.select({
-        count: sql<number>`count(*)`
-    }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 0);
 
     if (!course || !start) throw error(400, 'You are not enrolled in any course');
-    if (!(course in ans)) throw error(400, 'You are not enrolled in any course');
-    await db.delete(participants).where(eq(participants.userId, session.user.id));
-    await db.delete(answers).where(eq(answers.userId, session.user.id));
-    await db.insert(results).values({
-        userId: session.user.id,
-        course,
-        totalTime: new Date().getTime() - start.getTime(),
-        start,
-        end: new Date(),
-        penalty:penalty-10
-    });
-    //AC
-    throw redirect(302, `/result/${course}`)
+    if (course === 1 || course === 2 || course === 3) {
+        const penalty = await db.select({
+            count: sql<number>`count(*)`
+        }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 0);
+        await db.delete(participants).where(eq(participants.userId, session.user.id));
+        await db.delete(answers).where(eq(answers.userId, session.user.id));
+        await db.insert(results).values({
+            userId: session.user.id,
+            course,
+            totalTime: new Date().getTime() - start.getTime(),
+            start,
+            end: new Date(),
+            penalty: penalty - 10
+        });
+        //AC
+        throw redirect(302, `/result/${course}`)
+    }else {
+        return {}
+    }
 }
 
 export const actions: Actions = {
@@ -70,7 +73,6 @@ export const actions: Actions = {
             .get()
             .then((v) => v ?? {course: null, start: null});
         if (!course || !start) throw error(400, 'You are not enrolled in any course');
-        if (!(course in ans)) throw error(400, 'You are not enrolled in any course');
 
         if (ans[course] !== answer) {
             //WA
@@ -79,6 +81,10 @@ export const actions: Actions = {
                 message: 'Wrong answer'
             });
         } else {
+            const penalty = await db.select({
+                count: sql<number>`count(*)`
+            }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 9) - 1;
+
             await db.delete(participants).where(eq(participants.userId, session.user.id));
             await db.delete(answers).where(eq(answers.userId, session.user.id));
             await db.insert(results).values({
@@ -86,7 +92,8 @@ export const actions: Actions = {
                 course,
                 totalTime: new Date().getTime() - start.getTime(),
                 start,
-                end: new Date()
+                end: new Date(),
+                penalty
             });
             //AC
             throw redirect(302, `/result/${course}`)

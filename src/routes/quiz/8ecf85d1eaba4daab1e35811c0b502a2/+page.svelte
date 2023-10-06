@@ -3,6 +3,7 @@
 	import Quiz from '$lib/components/quiz.svelte';
 	import QuizBase from '$lib/components/quizBase.svelte';
 	import Katex from "svelte-katex";
+	import Icon from "@iconify/svelte";
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -10,10 +11,9 @@
 </script>
 <QuizBase {form} answer={data.answer} {q}>
 	{#if data.course === 1}
-		<Quiz questionnaire='回答を入力'>
+		<Quiz questionnaire='回答を入力' image="/images/quiz/EZ-5.png">
         <span slot='quiz'>
-            <h1 class='font-bold text-2xl'>初級用問題文</h1>
-            <p>より詳細な問題文、、、、、、、、、、、、、</p>
+			※ひらがなで答えてください
         </span>
 			<form method='post' class='space-x-4 space-y-2'>
 				<!--実際に入力する例-->
@@ -53,4 +53,36 @@
 		</Quiz>
 1
 	{/if}
+
+	<div class='hero min-h-screen fixed top-0 -z-10' slot="correct">
+        <div class='hero-content text-center'>
+            <div class='space-y-4'>
+                {#if data.course === 1}
+                    <h1 class='text-5xl font-bold'>
+                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
+                        正解！
+                    </h1>
+                    <h1 class='text-3xl'>
+                        見逃してる問題あります！
+                    </h1>
+                {:else if data.course === 2}
+                    <h1 class='text-5xl font-bold'>
+                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
+                        正解！
+                    </h1>
+                    <h1 class='text-3xl'>
+                        見逃してる問題あります！
+                    </h1>
+                {:else if data.course === 3}
+                    <h1 class='text-5xl font-bold'>
+                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
+                        正解！
+                    </h1>
+                    <h1 class='text-3xl'>
+                        見逃してる問題あります！
+                    </h1>
+                {/if}
+            </div>
+        </div>
+    </div>
 </QuizBase>
