@@ -44,12 +44,22 @@
 				<span>また、<Katex>AB</Katex> の一の位と十の位を入れ替えてできる二桁の自然数を <Katex>BA</Katex> とする。</span><br/>
 				<span>このとき、<Katex>AB</Katex> × <Katex>BA</Katex> = 3478 となる <Katex>AB</Katex> は⑥である</span>
 			</p>
+            <label for="hint" class="btn">hint</label>
         </span>
             <form method='post'>
                 <input type='number' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
                        value={form?.answer??""}/>
                 <button class='btn btn-accent' type='submit'>送信</button>
             </form>
+            <input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">素因数分解してもできるけどしなくてもできるようになってるよ～</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn btn-secondary">Close</label>
+                    </div>
+                </div>
+            </div>
         </Quiz>
     {:else if data.course === 4}
         <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-5.png">

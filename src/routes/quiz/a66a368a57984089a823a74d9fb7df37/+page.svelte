@@ -52,12 +52,23 @@
 					例えば 12 進数での 13 は 10 進数での 15 である。（12+3=15）
 				</span>
 			</p>
+
+                <label for="hint" class="btn">hint</label>
         </span>
             <form method='post'>
                 <input type='number' name='answer' class='input input-bordered w-full max-w-xs'
                        value={form?.answer??""}/>
                 <button class='btn btn-accent' type='submit'>送信</button>
             </form>
+            <input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">末尾に0が何個付くか考えてみよう</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn btn-secondary">Close</label>
+                    </div>
+                </div>
+            </div>
         </Quiz>
     {:else if data.course === 4}
         <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-3.png">

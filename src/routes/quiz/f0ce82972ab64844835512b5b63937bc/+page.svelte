@@ -58,19 +58,31 @@
                         <Katex>A ≡ B</Katex>のとき、<Katex>Ak ≡ B</Katex><br/>
                     </span>
                 </p>
+                <label for="hint" class="btn btn-secondary">hint</label>
             </span>
             <form method='post'>
                 <input type='number' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
                        value={form?.answer??""}/>
                 <button class='btn btn-accent' type='submit'>送信</button>
-
             </form>
+
+            <!-- Put this part before </body> tag -->
+            <input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">・周期性に注目！</h3>
+                    <h3 class="font-bold text-lg">・<Katex>mod 10</Katex> 以外もつかうかも？</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn">Close</label>
+                    </div>
+                </div>
+            </div>
         </Quiz>
     {:else }
         <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-1.png">
             <span slot='quiz'>
                 <p class="text-xl">
-                    ※アルファべットはすべて小文字で入力してください。
+                    ※アルファべットはすべて小文字で入力してください。1
                 </p>
             </span>
             <form method='post'>

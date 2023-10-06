@@ -36,7 +36,6 @@ export const actions = {
 			})
 			.from(participants)
 			.where(eq(participants.userId, session?.user?.id));
-		//todo check if course is already finished
 		if (courseExists.length > 0) throw error(400, 'Already participated');
 
 		await db.insert(participants).values({

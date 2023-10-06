@@ -46,6 +46,8 @@
 				<p class="text-xl">
 					<span>図 1 のように立方体<Katex>X</Katex> に内接している立体<Katex>Y</Katex> がある。（実線部）ただし、立体 <Katex>Y</Katex> の頂点はすべて立方体<Katex>X</Katex> の辺の中点である。この時、立方体 <Katex>X</Katex> と立体<Katex>Y</Katex> の体積比は<Katex>A:B</Katex>である。</span>
 				</p>
+
+                <label for="hint" class="btn">hint</label>
 			</span>
 			<form method='post' class="flex flex-col gap-2">
 				<div class="join">
@@ -61,6 +63,15 @@
 				<input type="hidden"  name='answer' value="{A}:{B}">
 				<button type="submit" class="btn btn-secondary">確定</button>
 			</form>
+			<input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">簡単に体積が求められそうな形になるように切ってみると？</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn btn-secondary">Close</label>
+                    </div>
+                </div>
+            </div>
 		</Quiz>
 	{:else }
 			<Quiz questionnaire='回答を入力' image="/images/quiz/NZ-2.png">
