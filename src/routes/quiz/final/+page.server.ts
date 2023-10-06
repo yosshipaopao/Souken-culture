@@ -9,9 +9,9 @@ const q = 'final';
 const ans: {
     [key: number]: string;
 } = {
-    1: 'Beginner',
+    1: 'そうけんのあおいかみ',
     2: 'Intermediate',
-    3: 'Advanced'
+    3: 'つばめ'
 };
 //ここを変更
 
@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({locals}) => {
         .then((v) => v ?? {course: null, start: null});
 
     if (!course || !start) throw error(400, 'You are not enrolled in any course');
-    if (course === 1 || course === 2 || course === 3) {
+    if (course === 2) {
         const penalty = await db.select({
             count: sql<number>`count(*)`
         }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 0);
@@ -48,7 +48,14 @@ export const load: PageServerLoad = async ({locals}) => {
         //AC
         throw redirect(302, `/result/${course}`)
     }else {
-        return {}
+        const fans = await db.selectDistinct({
+            question: answers.question
+        }).from(answers).where(eq(answers.userId, session.user.id));
+        if(fans.length>=5){
+            return {}
+        }else {
+            throw error(400, 'すべての問題をクリアしてください');
+        }
     }
 }
 
@@ -83,7 +90,7 @@ export const actions: Actions = {
         } else {
             const penalty = await db.select({
                 count: sql<number>`count(*)`
-            }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 9) - 1;
+            }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 9) - 10;
 
             await db.delete(participants).where(eq(participants.userId, session.user.id));
             await db.delete(answers).where(eq(answers.userId, session.user.id));
