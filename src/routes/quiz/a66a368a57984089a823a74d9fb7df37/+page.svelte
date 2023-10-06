@@ -59,6 +59,19 @@
                 <button class='btn btn-accent' type='submit'>送信</button>
             </form>
         </Quiz>
+    {:else if data.course === 4}
+        <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-3.png">
+        <span slot='quiz'>
+            ※ひらがなで答えてください
+        </span>
+            <form method='post' class='space-x-4 space-y-2'>
+                <!--実際に入力する例-->
+                <input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
+                       value={form?.answer??""}/>
+                <button class='btn btn-accent' type='submit'>送信</button>
+            </form>
+        </Quiz>
+
     {/if}
 
     <div class='hero min-h-screen fixed top-0 -z-10' slot="correct">
@@ -66,15 +79,7 @@
             <div class='space-y-4'>
                 {#if data.course === 1}
                     <img src="/images/quiz/EZ-3A.png">
-                {:else if data.course === 2}
-                    <h1 class='text-5xl font-bold'>
-                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
-                        正解！
-                    </h1>
-                    <h1 class='text-3xl'>
-                        2号館2階へ向かえ！
-                    </h1>
-                {:else if data.course === 3}
+                {:else}
                     <h1 class='text-5xl font-bold'>
                         <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
                         正解！

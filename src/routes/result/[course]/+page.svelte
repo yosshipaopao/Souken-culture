@@ -30,6 +30,7 @@
         <option value={1}>EZ</option>
         <option value={2}>IN</option>
         <option value={3}>MA</option>
+        <option value={4}>NZ</option>
     </select>
 </div>
 <div class='hero min-h-screen fixed top-0 -z-10'>

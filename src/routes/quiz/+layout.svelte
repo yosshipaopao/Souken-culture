@@ -51,11 +51,13 @@
                 <form method='post' action='/quiz?/course' class='flex flex-col gap-2 justify-center w-96'>
                     <input type='hidden' name='redirect' value={here}>
                     <button type="submit" name="course" value="beginner" class="btn btn-primary course-label"
-                           disabled={data.doneCourses.some(v=>v===1)}>ただのなぞなぞコース</button>
+                           disabled={data.doneCourses.some(v=>v===1)}>とーふならではコース</button>
                     <button type="submit" name="course" value="intermediate" class="btn btn-primary course-label"
-                           disabled={data.doneCourses.some(v=>v===2)}>ノーマル（？）コース</button>
+                           disabled={data.doneCourses.some(v=>v===2)}>数学鬼コース（図形）</button>
                     <button type="submit" name="course" value="advanced" class="btn btn-primary course-label"
-                           disabled={data.doneCourses.some(v=>v===3)}>数学鬼コース</button>
+                           disabled={data.doneCourses.some(v=>v===3)}>数学鬼コース（数式）</button>
+                    <button type="submit" name="course" value="easy" class="btn btn-primary course-label"
+                           disabled={data.doneCourses.some(v=>v===4)}>簡単なぞなぞコース</button>
                 </form>
             </div>
         </div>

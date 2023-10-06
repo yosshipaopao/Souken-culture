@@ -24,6 +24,9 @@ export const actions = {
 			case 'advanced':
 				courseNumber = 3;
 				break;
+			case 'easy':
+				courseNumber = 4;
+				break;
 			default:
 				throw error(400, 'Bad Request');
 		}

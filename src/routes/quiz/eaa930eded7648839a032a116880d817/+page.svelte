@@ -62,6 +62,16 @@
 				<button type="submit" class="btn btn-secondary">確定</button>
 			</form>
 		</Quiz>
+	{:else }
+			<Quiz questionnaire='回答を入力' image="/images/quiz/NZ-2.png">
+			<span slot='quiz'>
+			</span>
+			<form method='post' class="flex flex-col gap-2">
+				<input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
+							 value={form?.answer??""} />
+				<button class='btn btn-accent' type='submit'>送信</button>
+			</form>
+		</Quiz>
 	{/if}
 
 	<div class='hero min-h-screen fixed top-0 -z-10' slot="correct">
@@ -69,21 +79,13 @@
             <div class='space-y-4'>
                 {#if data.course === 1}
                     <img src="/images/quiz/EZ-2A.png">
-                {:else if data.course === 2}
+                {:else}
                     <h1 class='text-5xl font-bold'>
                         <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
                         正解！
                     </h1>
                     <h1 class='text-3xl'>
-                        ?号館?階へ向かえ！
-                    </h1>
-                {:else if data.course === 3}
-                    <h1 class='text-5xl font-bold'>
-                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
-                        正解！
-                    </h1>
-                    <h1 class='text-3xl'>
-                        ?号館?階へ向かえ！
+                        1号館4階へ向かえ！
                     </h1>
                 {/if}
             </div>
