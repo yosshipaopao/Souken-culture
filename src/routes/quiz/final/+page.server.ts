@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({locals}) => {
         .then((v) => v ?? {course: null, start: null});
 
     if (!course || !start) throw error(400, 'You are not enrolled in any course');
-    if (course === 2) {
+    if (course === 2||course===4) {
         const penalty = await db.select({
             count: sql<number>`count(*)`
         }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 0);

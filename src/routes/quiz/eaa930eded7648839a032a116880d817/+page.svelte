@@ -46,6 +46,8 @@
 				<p class="text-xl">
 					<span>図 1 のように立方体<Katex>X</Katex> に内接している立体<Katex>Y</Katex> がある。（実線部）ただし、立体 <Katex>Y</Katex> の頂点はすべて立方体<Katex>X</Katex> の辺の中点である。この時、立方体 <Katex>X</Katex> と立体<Katex>Y</Katex> の体積比は<Katex>A:B</Katex>である。</span>
 				</p>
+
+                <label for="hint" class="btn">hint</label>
 			</span>
 			<form method='post' class="flex flex-col gap-2">
 				<div class="join">
@@ -61,6 +63,25 @@
 				<input type="hidden"  name='answer' value="{A}:{B}">
 				<button type="submit" class="btn btn-secondary">確定</button>
 			</form>
+			<input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">簡単に体積が求められそうな形になるように切ってみると？</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn btn-secondary">Close</label>
+                    </div>
+                </div>
+            </div>
+		</Quiz>
+	{:else }
+			<Quiz questionnaire='回答を入力' image="/images/quiz/NZ-2.png">
+			<span slot='quiz'>
+			</span>
+			<form method='post' class="flex flex-col gap-2">
+				<input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
+							 value={form?.answer??""} />
+				<button class='btn btn-accent' type='submit'>送信</button>
+			</form>
 		</Quiz>
 	{/if}
 
@@ -69,21 +90,13 @@
             <div class='space-y-4'>
                 {#if data.course === 1}
                     <img src="/images/quiz/EZ-2A.png">
-                {:else if data.course === 2}
+                {:else}
                     <h1 class='text-5xl font-bold'>
                         <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
                         正解！
                     </h1>
                     <h1 class='text-3xl'>
-                        ?号館?階へ向かえ！
-                    </h1>
-                {:else if data.course === 3}
-                    <h1 class='text-5xl font-bold'>
-                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
-                        正解！
-                    </h1>
-                    <h1 class='text-3xl'>
-                        ?号館?階へ向かえ！
+                        1号館4階へ向かえ！
                     </h1>
                 {/if}
             </div>

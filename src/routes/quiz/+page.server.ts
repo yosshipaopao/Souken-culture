@@ -24,6 +24,9 @@ export const actions = {
 			case 'advanced':
 				courseNumber = 3;
 				break;
+			case 'easy':
+				courseNumber = 4;
+				break;
 			default:
 				throw error(400, 'Bad Request');
 		}
@@ -33,7 +36,6 @@ export const actions = {
 			})
 			.from(participants)
 			.where(eq(participants.userId, session?.user?.id));
-		//todo check if course is already finished
 		if (courseExists.length > 0) throw error(400, 'Already participated');
 
 		await db.insert(participants).values({
