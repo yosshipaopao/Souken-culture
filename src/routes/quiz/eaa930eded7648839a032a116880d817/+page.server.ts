@@ -12,7 +12,7 @@ const ans: {
 } = {
 	1: 'Beginner',
 	2: 'Intermediate',
-	3: 'Advanced'
+	3: '4'
 };
 //ここまで変更
 

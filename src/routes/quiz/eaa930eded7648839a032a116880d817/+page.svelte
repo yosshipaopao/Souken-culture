@@ -2,6 +2,7 @@
 	import type { PageData, ActionData } from './$types';
 	import Quiz from '$lib/components/quiz.svelte';
 	import QuizBase from '$lib/components/quizBase.svelte';
+	import Katex from "svelte-katex";
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -35,15 +36,17 @@
 			</form>
 		</Quiz>
 	{:else if data.course === 3}
-		<Quiz questionnaire='回答を入力'>
+		<Quiz questionnaire='回答を入力' image="/images/quiz/Math-4-1.png">
         <span slot='quiz'>
-            <h1 class='font-bold text-2xl'>上級用問題文</h1>
-            <p>より詳細な問題文、、、、、、、、、、、、、</p>
+            <h1 class='font-bold text-2xl'>数学鬼コース―4</h1>
+            <p>
+				<span>次の式の A の値</span>
+			</p>
         </span>
 			<form method='post'>
-				<button class='btn'>選択肢的な１</button>
-				<button class='btn'>選択肢的な２</button>
-				<button class='btn'>選択肢的な３</button>
+				<input type='number' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
+							 value={form?.answer??""} />
+				<button class='btn btn-accent' type='submit'>送信</button>
 			</form>
 		</Quiz>
 	{/if}

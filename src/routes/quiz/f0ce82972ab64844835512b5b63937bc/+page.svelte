@@ -2,6 +2,7 @@
 	import type { PageData, ActionData } from './$types';
 	import Quiz from '$lib/components/quiz.svelte';
 	import QuizBase from '$lib/components/quizBase.svelte';
+	import Katex from "svelte-katex";
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -38,12 +39,16 @@
 		<Quiz questionnaire='回答を入力'>
         <span slot='quiz'>
             <h1 class='font-bold text-2xl'>上級用問題文</h1>
-            <p>より詳細な問題文、、、、、、、、、、、、、</p>
+            <p>
+				<span>二桁の自然数 <Katex>AB</Katex>(<Katex>AB</Katex> ≧ 50 )がある。</span><br/>
+				<span>また、<Katex>AB</Katex> の一の位と十の位を入れ替えてできる二桁の自然数を <Katex>BA</Katex> とする。</span><br/>
+				<span>このとき、<Katex>AB</Katex> × <Katex>BA</Katex> = 3478 となる <Katex>AB</Katex> は⑥である</span>
+			</p>
         </span>
 			<form method='post'>
-				<button class='btn' name='answer' value='Beginner'>Beginner</button>
-				<button class='btn' name='answer' value='Intermediate'>Intermediate</button>
-				<button class='btn' name='answer' value='Advanced'>Advanced</button>
+				<input type='number' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
+							 value={form?.answer??""} />
+				<button class='btn btn-accent' type='submit'>送信</button>
 			</form>
 		</Quiz>
 	{/if}

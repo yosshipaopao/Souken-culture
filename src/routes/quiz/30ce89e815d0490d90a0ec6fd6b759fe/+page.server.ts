@@ -12,7 +12,7 @@ const ans: {
 } = {
 	1: 'Beginner',
 	2: 'Intermediate',
-	3: 'Advanced'
+	3: '6:1'
 };
 //ここまで変更
 
@@ -51,7 +51,7 @@ export const actions: Actions = {
 			.then((v) => v?.course);
 		if (!course) throw error(400, 'You are not enrolled in any course');
 		if (!(course in ans)) throw error(400, 'You are not enrolled in any course');
-
+		//console.log(course, ans[course], answer);
 		if (ans[course] !== answer) {
 			await db.insert(answers).values({
 				question: q,
