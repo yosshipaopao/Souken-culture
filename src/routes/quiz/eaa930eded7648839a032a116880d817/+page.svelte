@@ -3,17 +3,19 @@
 	import Quiz from '$lib/components/quiz.svelte';
 	import QuizBase from '$lib/components/quizBase.svelte';
 	import Katex from "svelte-katex";
+	import Icon from "@iconify/svelte";
 
 	export let data: PageData;
 	export let form: ActionData;
 	const q = 'eaa930eded7648839a032a116880d817';
+	let A= 0;
+	let B= 0;
 </script>
 <QuizBase {form} answer={data.answer} {q}>
 	{#if data.course === 1}
-		<Quiz questionnaire='回答を入力'>
+		<Quiz questionnaire='回答を入力' image="/images/quiz/EZ-2.png">
         <span slot='quiz'>
-            <h1 class='font-bold text-2xl'>初級用問題文</h1>
-            <p>より詳細な問題文、、、、、、、、、、、、、</p>
+			※ひらがなで答えてください
         </span>
 			<form method='post' class='space-x-4 space-y-2'>
 				<!--実際に入力する例-->
@@ -23,31 +25,68 @@
 			</form>
 		</Quiz>
 	{:else if data.course === 2}
-		<Quiz questionnaire='回答を選択'>
+		<Quiz questionnaire='回答を選択' image="/images/quiz/IN-2.png">
         <span slot='quiz'>
-            <h1 class='font-bold text-2xl'>中級用問題文</h1>
-            <p>より詳細な問題文、、、、、、、、、、、、、</p>
+            <h1 class='font-bold text-2xl'>Anamnesis</h1>
+            <p class="text-xl">立体から投影図を描く。<br/>
+			斜めにした（直）円錐を（無限遠点からの）光で照らしたときにできる影を教えてほしいです．</p>
         </span>
 			<form method='post'>
 				<!--選択肢的な例-->
-				<button class='btn' name='answer' value='Beginner'>Beginner</button>
-				<button class='btn' name='answer' value='Intermediate'>Intermediate</button>
-				<button class='btn' name='answer' value='Advanced'>Advanced</button>
+                <button class='btn' name='answer' value='A'>A</button>
+                <button class='btn' name='answer' value='B'>B</button>
+                <button class='btn' name='answer' value='C'>C</button>
+                <button class='btn' name='answer' value='D'>D</button>
 			</form>
 		</Quiz>
 	{:else if data.course === 3}
-		<Quiz questionnaire='回答を入力' image="/images/quiz/Math-4-1.png">
-        <span slot='quiz'>
-            <h1 class='font-bold text-2xl'>数学鬼コース―4</h1>
-            <p>
-				<span>次の式の A の値</span>
-			</p>
-        </span>
-			<form method='post'>
-				<input type='number' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
-							 value={form?.answer??""} />
-				<button class='btn btn-accent' type='submit'>送信</button>
+		<Quiz questionnaire='回答を入力' image="/images/quiz/Math-2-1.png">
+			<span slot='quiz'>
+				<h1 class='font-bold text-2xl'>数学鬼コース―2</h1>
+				<p class="text-xl">
+					<span>図 1 のように立方体<Katex>X</Katex> に内接している立体<Katex>Y</Katex> がある。（実線部）ただし、立体 <Katex>Y</Katex> の頂点はすべて立方体<Katex>X</Katex> の辺の中点である。この時、立方体 <Katex>X</Katex> と立体<Katex>Y</Katex> の体積比は<Katex>A:B</Katex>である。</span>
+				</p>
+			</span>
+			<form method='post' class="flex flex-col gap-2">
+				<div class="join">
+					<div class="join-item w-16 bg-warning flex items-center justify-center">A:</div>
+					<input type='number' placeholder='A' class='join-item input input-bordered w-full max-w-xs'
+							 bind:value={A} />
+				</div>
+				<div class="join">
+					<div class="join-item w-16 bg-warning flex items-center justify-center">B:</div>
+					<input type='number' placeholder='B' class='join-item input input-bordered w-full max-w-xs'
+							 bind:value={B} />
+				</div>
+				<input type="hidden"  name='answer' value="{A}:{B}">
+				<button type="submit" class="btn btn-secondary">確定</button>
 			</form>
 		</Quiz>
 	{/if}
+
+	<div class='hero min-h-screen fixed top-0 -z-10' slot="correct">
+        <div class='hero-content text-center'>
+            <div class='space-y-4'>
+                {#if data.course === 1}
+                    <img src="/images/quiz/EZ-2A.png">
+                {:else if data.course === 2}
+                    <h1 class='text-5xl font-bold'>
+                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
+                        正解！
+                    </h1>
+                    <h1 class='text-3xl'>
+                        ?号館?階へ向かえ！
+                    </h1>
+                {:else if data.course === 3}
+                    <h1 class='text-5xl font-bold'>
+                        <Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
+                        正解！
+                    </h1>
+                    <h1 class='text-3xl'>
+                        ?号館?階へ向かえ！
+                    </h1>
+                {/if}
+            </div>
+        </div>
+    </div>
 </QuizBase>

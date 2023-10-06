@@ -86,7 +86,7 @@
             <div class='modal'>
                 <div class='modal-box'>
                     <h3 class='text-lg font-bold'>HELP</h3>
-                    <p class='py-4'>頑張って</p>
+                    <p class='py-4'>ご不明な点があれば4号館4会の創研ブースへお越しください</p>
                 </div>
                 <label class='modal-backdrop' for='help'>Close</label>
             </div>

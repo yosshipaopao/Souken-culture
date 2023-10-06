@@ -27,9 +27,9 @@
 
 <div class='px-2 md:px-8'>
     <select class="select select-bordered select-primary select-sm" bind:value={course} on:change={()=>goto(`/result/${course}`)}>
-        <option value={1}>初級</option>
-        <option value={2}>中級</option>
-        <option value={3}>上級</option>
+        <option value={1}>EZ</option>
+        <option value={2}>IN</option>
+        <option value={3}>MA</option>
     </select>
 </div>
 <div class='hero min-h-screen fixed top-0 -z-10'>
@@ -40,7 +40,7 @@
                     <h1 class='font-bold text-3xl'>Result</h1>
                     <h1 class='font-bold text-3xl'>start:   {dateToTimeString(data.yourResult.start)}</h1>
                     <h1 class='font-bold text-3xl'>finish:   {dateToTimeString(data.yourResult.end)}</h1>
-                    <h1 class='font-bold text-3xl'>total:   {calTotal(data.yourResult.total)}</h1>
+                    <h1 class='font-bold text-3xl'>total:   {calTotal(data.yourResult.total)} ( {data.yourResult.penalty} )</h1>
                 {:else}
                     <h1 class='font-bold text-3xl'>未達成</h1>
                 {/if}

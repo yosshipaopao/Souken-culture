@@ -11,8 +11,8 @@ const ans: {
 	[key: number]: string;
 } = {
 	1: 'Beginner',
-	2: 'Intermediate',
-	3: "43"
+	2: '13',
+	3: "74"
 };
 //ここまで変更
 

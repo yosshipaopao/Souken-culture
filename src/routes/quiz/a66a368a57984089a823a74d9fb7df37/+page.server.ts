@@ -10,8 +10,8 @@ const q = 'a66a368a57984089a823a74d9fb7df37';
 const ans: {
 	[key: number]: string;
 } = {
-	1: 'Beginner',
-	2: 'Intermediate',
+	1: 'でんきをとおしやすい',
+	2: 'blue',
 	3: '0'
 };
 //ここまで変更

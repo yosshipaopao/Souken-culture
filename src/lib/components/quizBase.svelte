@@ -16,16 +16,8 @@
 	{/if}
 </div>
 {#if form?.success || answer.find((v) => v.question === q && v.isCorrect)}
-	<div class='hero min-h-screen fixed top-0 -z-10'>
-		<div class='hero-content text-center'>
-			<div class='space-y-4'>
-				<h1 class='text-5xl font-bold'>
-					<Icon icon='mdi:check-circle-outline' class='inline-block mr-4' />
-					正解！
-				</h1>
-			</div>
-		</div>
-	</div>
+	
+	<slot name='correct' />
 {:else}
 	<slot />
 {/if}

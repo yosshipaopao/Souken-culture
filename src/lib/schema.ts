@@ -1,4 +1,4 @@
-import { sqliteTable, integer, text, primaryKey } from 'drizzle-orm/sqlite-core';
+import {sqliteTable, integer, text, primaryKey, index, uniqueIndex} from 'drizzle-orm/sqlite-core';
 import type { AdapterAccount } from '@auth/core/adapters';
 import { sql } from 'drizzle-orm';
 
@@ -9,11 +9,13 @@ export const results = sqliteTable(
 		course: integer('course').notNull(),
 		totalTime: integer('totalTime').notNull(),
 		start: integer('start', { mode: 'timestamp_ms' }).notNull(),
-		end: integer('end', { mode: 'timestamp_ms' }).notNull()
+		end: integer('end', { mode: 'timestamp_ms' }).notNull(),
+		penalty: integer('penalty').notNull()
 	},
 	(vt) => {
 		return {
-			compoundKey: primaryKey(vt.userId, vt.course)
+			compoundKey: primaryKey(vt.userId, vt.course),
+			totalIndex: index("total").on(vt.totalTime)
 		};
 	}
 );
@@ -24,7 +26,10 @@ export const participants = sqliteTable('participant', {
 		.references(() => users.id, { onDelete: 'cascade' }),
 	start: integer('start', { mode: 'timestamp_ms' }).notNull(),
 	course: integer('course').notNull()
-});
+}, (vt) => ({
+	uidIndex: index("uid_idx").on(vt.userId, vt.course),
+}));
+
 export const answers = sqliteTable('answer', {
 	id: integer('id').primaryKey({ autoIncrement: true }),
 	question: text('question').notNull(),
@@ -43,7 +48,9 @@ export const users = sqliteTable('user', {
 	email: text('email').notNull(),
 	emailVerified: integer('emailVerified', { mode: 'timestamp_ms' }),
 	image: text('image')
-});
+}, (vt) => ({
+	uidIndex: uniqueIndex("uid_index").on(vt.id),
+}));
 
 export const accounts = sqliteTable(
 	'account',

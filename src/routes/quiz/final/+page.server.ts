@@ -2,7 +2,7 @@ import type {Actions, PageServerLoad} from './$types';
 import {drizzle} from 'drizzle-orm/d1';
 import {answers, participants, results} from '$lib/schema';
 import {error, fail, redirect} from '@sveltejs/kit';
-import {eq} from 'drizzle-orm';
+import {eq, sql} from 'drizzle-orm';
 
 //ここを変更
 const q = 'final';
@@ -29,7 +29,9 @@ export const load: PageServerLoad = async ({locals}) => {
         .where(eq(participants.userId, session.user.id))
         .get()
         .then((v) => v ?? {course: null, start: null});
-
+    const penalty = await db.select({
+        count: sql<number>`count(*)`
+    }).from(answers).where(eq(answers.userId, session.user.id)).then((v) => v[0]?.count ?? 0);
 
     if (!course || !start) throw error(400, 'You are not enrolled in any course');
     if (!(course in ans)) throw error(400, 'You are not enrolled in any course');
@@ -40,7 +42,8 @@ export const load: PageServerLoad = async ({locals}) => {
         course,
         totalTime: new Date().getTime() - start.getTime(),
         start,
-        end: new Date()
+        end: new Date(),
+        penalty:penalty-10
     });
     //AC
     throw redirect(302, `/result/${course}`)
