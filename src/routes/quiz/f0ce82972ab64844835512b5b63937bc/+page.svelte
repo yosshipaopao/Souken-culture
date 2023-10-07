@@ -83,10 +83,9 @@
         <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-1.png">
             <span slot='quiz'>
                 <p class="text-xl">
-                    ※アルファべットはすべて小文字で入力してください。
+                    ※アルファべットは<span class="text-warning">すべて小文字で</span>入力してください。
 
                 </p>
-<p class='text-3xl text-error'>大文字小文字指定に間違いがありました 大変申し訳ございません</p>
             </span>
             <form method='post'>
                 <input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
