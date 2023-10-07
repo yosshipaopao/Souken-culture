@@ -43,8 +43,9 @@
             <span slot='quiz'>
                 <h1 class='font-bold text-2xl'>数学鬼コース―1</h1>
                 <p class="text-xl">
-                    <span><Katex>(n ^ n) ^ n ≡ 7 ( mod 10 ) </Katex>となる素数 <Katex>n</Katex> のうち５番目に小さい <Katex>n</Katex>を答えよ。</span><br/>
-                    <span>※1 表 1 は <Katex>a^b</Katex> の下一桁を <Katex>a</Katex> を縦に <Katex>b</Katex> を横にしてまとめたものの一部である。</span>
+                    <span>n ^ n ^ n ≡ <Katex>7 ( mod 10 ) </Katex>となる素数 <Katex>n</Katex> のうち５番目に小さい <Katex>n</Katex>を答えよ。</span><br/>
+                    <span>※1 表 1 は <Katex>a^b</Katex> の下一桁を <Katex>a</Katex> を縦に <Katex>b</Katex> を横にしてまとめたものの一部である。</span><br/>
+                    <span>※2 n ^ n は <Katex>n ^ n </Katex> であり、 n^n^nは n ^ ( n ^ n )  である </span>
                     <br/>
                     <br/>
                     <span>補足<br/>
