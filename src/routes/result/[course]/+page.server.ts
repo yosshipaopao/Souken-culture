@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 import { drizzle } from 'drizzle-orm/d1';
-import { results, users } from '$lib/schema';
-import { and, asc, eq, isNotNull } from 'drizzle-orm';
+import { results } from '$lib/schema';
+import { and,  eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ locals, parent ,params}) => {
 	const { session } = await parent();
@@ -21,21 +21,9 @@ export const load: PageServerLoad = async ({ locals, parent ,params}) => {
 		.from(results)
 		.where(and(eq(results.userId, id), eq(results.course, reqCourse)))
 		.get();
-
-	const fastest = await db
-		.select({
-			name: users.name,
-			image: users.image,
-			total: results.totalTime
-		})
-		.from(results)
-		.where(and(eq(results.course, reqCourse), isNotNull(results.totalTime)))
-		.orderBy(asc(results.totalTime)).limit(5)
-		.leftJoin(users, eq(users.id, results.userId));
-
+	
 	return {
 		yourResult: yourResult?.end ? yourResult : null,
-		fastest,
 		course: reqCourse
 	};
 };
