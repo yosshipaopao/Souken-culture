@@ -72,7 +72,10 @@
             <div class="modal">
                 <div class="modal-box">
                     <h3 class="font-bold text-lg">・周期性に注目！</h3>
-                    <h3 class="font-bold text-lg">・<Katex>mod 10</Katex> 以外もつかうかも？</h3>
+                    <h3 class="font-bold text-lg">・
+                        <Katex>mod 10</Katex>
+                        以外もつかうかも？
+                    </h3>
                     <div class="modal-action">
                         <label for="hint" class="btn">Close</label>
                     </div>
@@ -84,8 +87,8 @@
             <span slot='quiz'>
                 <p class="text-xl">
                     ※アルファべットは<span class="text-warning">すべて小文字で</span>入力してください。
-
                 </p>
+                <label for="hint" class="btn btn-secondary">hint</label>
             </span>
             <form method='post'>
                 <input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
@@ -93,6 +96,16 @@
                 <button class='btn btn-accent' type='submit'>送信</button>
 
             </form>
+            <input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">・「作業」ができなくなった！?</h3>
+                    <h3 class="font-bold text-lg">・口喧嘩は「〇〇あい」</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn">Close</label>
+                    </div>
+                </div>
+            </div>
         </Quiz>
     {/if}
 

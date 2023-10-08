@@ -76,12 +76,23 @@
 	{:else }
 			<Quiz questionnaire='回答を入力' image="/images/quiz/NZ-2.png">
 			<span slot='quiz'>
+				<label for="hint" class="btn btn-secondary">hint</label>
 			</span>
 			<form method='post' class="flex flex-col gap-2">
 				<input type='text' placeholder='Type here' name='answer' class='input input-bordered w-full max-w-xs'
 							 value={form?.answer??""} />
 				<button class='btn btn-accent' type='submit'>送信</button>
 			</form>
+				<input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">・化学は英語で！？</h3>
+                    <h3 class="font-bold text-lg">・４文字の野菜、、、</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn">Close</label>
+                    </div>
+                </div>
+            </div>
 		</Quiz>
 	{/if}
 
