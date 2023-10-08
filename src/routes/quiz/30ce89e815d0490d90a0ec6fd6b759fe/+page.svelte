@@ -65,6 +65,7 @@
         <Quiz questionnaire='回答を入力' image="/images/quiz/NZ-4.png">
         <span slot='quiz'>
 			※ひらがなで答えてください
+            <label for="hint" class="btn btn-secondary">hint</label>
         </span>
             <form method='post' class='space-x-4 space-y-2'>
                 <!--実際に入力する例-->
@@ -72,6 +73,16 @@
                        value={form?.answer??""}/>
                 <button class='btn btn-accent' type='submit'>送信</button>
             </form>
+            <input type="checkbox" id="hint" class="modal-toggle"/>
+            <div class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">・イラストがかなりのヒント</h3>
+                    <h3 class="font-bold text-lg">・爆発するときどんな音がする！？</h3>
+                    <div class="modal-action">
+                        <label for="hint" class="btn">Close</label>
+                    </div>
+                </div>
+            </div>
         </Quiz>
     {/if}
 
