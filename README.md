@@ -6,6 +6,6 @@
 
 QRコードを読んで出てきた問題を解いて、すべての問題を解くとおまけ問題が出てきます。
 
-GoogleやLINEのOAuthとSupabaseのデータベースで問題進捗等を管理します。
+GoogleやDiscordのOAuthとCloudflare D1のデータベースで問題進捗等を管理します。
 
 # 絶賛開発中!!!!!助けて!!!!!
